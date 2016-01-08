@@ -5,6 +5,7 @@
   "repository": "thejameskyle/babel-plugin-handlebars-inline-precompile",
   "license": "MIT",
   "main": "lib/index.js",
+  "files": ["lib"],
   "devDependencies": {
     "babel-cli": "^6.2.0",
     "babel-core": "^6.2.1",
