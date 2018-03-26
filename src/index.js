@@ -1,4 +1,5 @@
 import resolveCwd from 'resolve-cwd'
+import { addDefault } from "@babel/helper-module-imports"
 
 // Use local handlebars (if installed as a peer) rather than the version that
 // came with this plugin. Allows a newer handlebars to be used without needing
@@ -43,13 +44,13 @@ export default function({ types: t }) {
           throw path.buildCodeFrameError(`Only \`import hbs from '${IMPORT_NAME}'\` is supported. You used: \`${usedImportStatement}\``);
         }
 
-        const { name } = file.addImport('handlebars/runtime', 'default', scope.generateUid('Handlebars'));
+        const importPath = addDefault(path, 'handlebars/runtime', { nameHint: scope.generateUid('Handlebars') });
         path.remove();
 
         // Store the import name to lookup references elsewhere.
         file[IMPORT_PROP] = {
           input: first.local.name,
-          output: name
+          output: importPath.name
         };
       },
 
